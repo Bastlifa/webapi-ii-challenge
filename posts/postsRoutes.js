@@ -1,8 +1,10 @@
 const express = require("express")
 const db = require('../data/db')
+const cors = require('cors')
+
 
 const router = express.Router()
-
+router.use(cors())
 router.post('/', (req, res) =>
 {
     if(!req.body.title)
@@ -76,7 +78,7 @@ router.get('/:id', (req, res) =>
     db.findById(id)
         .then(response =>
             {
-                if(response)
+                if(response && response.length > 0)
                 {
                     res.status(200).json(response)
                 }

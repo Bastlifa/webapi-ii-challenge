@@ -22,14 +22,14 @@ export const PUT_POST_START = "PUT_POST_START"
 export const PUT_POST_SUCCESS = "PUT_POST_SUCCESS"
 export const PUT_POST_FAIL = "PUT_POST_FAIL"
 
-const baseURL = "localhost:8000/api"
+const baseURL = "http://localhost:5000/api"
 
 export const getPosts = _ => dispatch =>
 {
     dispatch({ type: GET_POSTS_START })
 
     axios
-        .get(`baseURL/posts`)
+        .get(`${baseURL}/posts`)
             .then(res =>
                 {
                     console.log("res from getPosts:", res)
@@ -47,7 +47,7 @@ export const getPost = id => dispatch =>
     dispatch({ type: GET_POST_START })
 
     axios
-        .get(`baseURL/posts/${id}`)
+        .get(`${baseURL}/posts/${id}`)
             .then(res =>
                 {
                     console.log("res from getPost:", res)
@@ -65,7 +65,7 @@ export const getComments = id => dispatch =>
     dispatch({ type: GET_COMMENTS_START })
 
     axios
-        .get(`baseURL/posts/${id}/comments`)
+        .get(`${baseURL}/posts/${id}/comments`)
             .then(res =>
                 {
                     console.log("res from getComments:", res)
@@ -83,7 +83,7 @@ export const postPost = post => dispatch =>
     dispatch({ type: POST_TO_POSTS_START })
 
     axios
-        .post(`baseURL/posts`, post)
+        .post(`${baseURL}/posts`, post)
             .then(res =>
                 {
                     console.log("res from postPost:", res)
@@ -101,7 +101,7 @@ export const postComment = (comment, postID) => dispatch =>
     dispatch({ type: POST_COMMENT_START })
 
     axios
-        .post(`baseURL/posts/${postID}/comments`, comment)
+        .post(`${baseURL}/posts/${postID}/comments`, comment)
             .then(res =>
                 {
                     console.log("res from postComment:", res)
@@ -119,7 +119,7 @@ export const deletePost = id => dispatch =>
     dispatch({ type: DELETE_POST_START })
 
     axios
-        .delete(`baseURL/posts/id`)
+        .delete(`${baseURL}/posts/id`)
             .then(res =>
                 {
                     console.log("res from deletePost:", res)
@@ -137,7 +137,7 @@ export const putPost = (post, id) => dispatch =>
     dispatch({ type: PUT_POST_START })
 
     axios
-        .post(`baseURL/posts/id`, post)
+        .post(`${baseURL}/posts/id`, post)
             .then(res =>
                 {
                     console.log("res from putPost:", res)

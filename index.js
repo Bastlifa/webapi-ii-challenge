@@ -1,9 +1,11 @@
 const express = require("express")
+const postsRoutes = require('./posts/postsRoutes')
+const cors = require('cors')
 const server = express()
 
-const postsRoutes = require('./posts/postsRoutes')
-
+server.use(express.json())
 server.use('/api/posts', postsRoutes)
+server.use(cors())
 
 const port = 5000
 server.listen(port, _ =>

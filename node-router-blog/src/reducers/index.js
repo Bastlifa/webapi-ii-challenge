@@ -26,13 +26,14 @@ const initialState =
 {
     error: "",
     posts: [],
-    singlePost: {},
+    singlePost: null,
     isLoading: false,
+    comments: []
 }
 
 export const reducer = (state = initialState, action) =>
 {
-    switch(action.payload)
+    switch(action.type)
     {
         case GET_POSTS_START:
             return {
@@ -41,6 +42,7 @@ export const reducer = (state = initialState, action) =>
                 error: "",
             }
         case GET_POSTS_SUCCESS:
+            console.log('action data from reducer', action.payload.data)
             return {
                 ...state,
                 isLoading: false,
@@ -63,7 +65,7 @@ export const reducer = (state = initialState, action) =>
             return {
                 ...state,
                 isLoading: false,
-                singlePost: action.payload.data,
+                singlePost: action.payload.data[0],
                 error: "",
             }
         case GET_POST_FAIL:
@@ -86,6 +88,25 @@ export const reducer = (state = initialState, action) =>
                 error: "",
             }
         case POST_TO_POSTS_FAIL:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload,
+            }
+        case GET_COMMENTS_START:
+            return {
+                ...state,
+                isLoading: true,
+                error: "",
+            }
+        case GET_COMMENTS_SUCCESS:
+            return {
+                ...state,
+                isLoading: false,
+                comments: action.payload.data,
+                error: "",
+            }
+        case GET_COMMENTS_FAIL:
             return {
                 ...state,
                 isLoading: false,

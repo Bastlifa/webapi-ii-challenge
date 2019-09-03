@@ -11,6 +11,7 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import { useSelector } from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -78,6 +79,8 @@ export default function Header() {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
+
+    const state = useSelector(state => state)
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -152,7 +155,7 @@ export default function Header() {
             </div>
             <div className={classes.grow} />
             <div className={classes.sectionDesktop}>
-                <IconButton aria-label="add new post" color="inherit">
+                <IconButton aria-label="add new post" color="inherit" onClick={_ => console.log(state.singlePost)}>
                     <AddCircleOutlineIcon />
                 </IconButton>
                 <IconButton
