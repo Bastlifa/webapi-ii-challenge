@@ -42,7 +42,7 @@ router.post('/:id/comments', (req, res) =>
     }
     else
     {
-        db.insertComment({text:req.body.text, post_id: req.params.id})
+        db.insertComment({text:req.body.text, post_id: Number(req.params.id)})
             .then(response =>
                 {
                     db.findCommentById(response.id)
