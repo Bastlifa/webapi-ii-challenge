@@ -59,7 +59,7 @@ export const getPost = id => dispatch =>
                     dispatch({ type: GET_POST_FAIL, payload: err })
                 })
 }
-}
+
 export const getComments = id => dispatch =>
 {
     dispatch({ type: GET_COMMENTS_START })
@@ -76,3 +76,76 @@ export const getComments = id => dispatch =>
                     console.log("err from getComments:", err)
                     dispatch({ type: GET_COMMENTS_FAIL, payload: err })
                 })
+}
+
+export const postPost = post => dispatch =>
+{
+    dispatch({ type: POST_TO_POSTS_START })
+
+    axios
+        .post(`baseURL/posts`, post)
+            .then(res =>
+                {
+                    console.log("res from postPost:", res)
+                    dispatch({ type: POST_TO_POSTS_SUCCESS, payload: res })
+                })
+            .catch(err =>
+                {
+                    console.log("err from postPost:", err)
+                    dispatch({ type: POST_TO_POSTS_FAIL, payload: err })
+                })
+}
+
+export const postComment = (comment, postID) => dispatch =>
+{
+    dispatch({ type: POST_COMMENT_START })
+
+    axios
+        .post(`baseURL/posts/${postID}/comments`, comment)
+            .then(res =>
+                {
+                    console.log("res from postComment:", res)
+                    dispatch({ type: POST_COMMENT_SUCCESS, payload: res })
+                })
+            .catch(err =>
+                {
+                    console.log("err from postComment:", err)
+                    dispatch({ type: POST_COMMENT_FAIL, payload: err })
+                })
+}
+
+export const deletePost = id => dispatch =>
+{
+    dispatch({ type: DELETE_POST_START })
+
+    axios
+        .delete(`baseURL/posts/id`)
+            .then(res =>
+                {
+                    console.log("res from deletePost:", res)
+                    dispatch({ type: DELETE_POST_SUCCESS, payload: res })
+                })
+            .catch(err =>
+                {
+                    console.log("err from deletePost:", err)
+                    dispatch({ type: DELETE_POST_FAIL, payload: err })
+                })
+}
+
+export const putPost = (post, id) => dispatch =>
+{
+    dispatch({ type: PUT_POST_START })
+
+    axios
+        .post(`baseURL/posts/id`, post)
+            .then(res =>
+                {
+                    console.log("res from putPost:", res)
+                    dispatch({ type: PUT_POST_SUCCESS, payload: res })
+                })
+            .catch(err =>
+                {
+                    console.log("err from putPost:", err)
+                    dispatch({ type: PUT_POST_FAIL, payload: err })
+                })
+}
