@@ -8,10 +8,12 @@ import InputBase from '@material-ui/core/InputBase';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import SearchIcon from '@material-ui/icons/Search';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { deletePost } from '../actions'
 
 const useStyles = makeStyles(theme => ({
     grow: {
@@ -75,12 +77,19 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function Header() {
+export default function Header(props) {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
     const state = useSelector(state => state)
+    const dispatch = useDispatch()
+
+    const handleAdd = _ =>
+    {
+        console.log("should open modal")
+        props.setModalOpen(true)
+    }
 
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -153,11 +162,24 @@ export default function Header() {
                 inputProps={{ 'aria-label': 'search' }}
                 />
             </div>
-            <div className={classes.grow} />
-            <div className={classes.sectionDesktop}>
-                <IconButton aria-label="add new post" color="inherit" onClick={_ => console.log(state.singlePost)}>
-                    <AddCircleOutlineIcon />
+            <Typography className={classes.title} variant="h6" noWrap>
+                {props.addPost ? "Add Post" : "Add Comment"}
+            </Typography>
+            <IconButton aria-label="add new post" color="inherit" onClick={handleAdd}>
+                <AddCircleOutlineIcon />
+            </IconButton>
+            {!props.addPost ?
+                <>
+                <Typography className={classes.title} variant="h6" noWrap>
+                    Delete Post
+                </Typography>
+                <IconButton aria-label="add new post" color="inherit" onClick={_ => dispatch(deletePost(props.postID))}>
+                    <DeleteForeverIcon />
                 </IconButton>
+                </> : null
+            }
+        <div className={classes.grow} />
+            <div className={classes.sectionDesktop}>
                 <IconButton
                 edge="end"
                 aria-label="account of current user"

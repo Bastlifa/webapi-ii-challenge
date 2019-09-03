@@ -42,7 +42,7 @@ router.post('/:id/comments', (req, res) =>
     }
     else
     {
-        db.insertComment(req.body)
+        db.insertComment({text:req.body.text, post_id: req.params.id})
             .then(response =>
                 {
                     db.findCommentById(response.id)
@@ -143,7 +143,7 @@ router.delete('/:id', (req, res) =>
             })
 })
 
-router.put('/', (req, res) =>
+router.put('/:id', (req, res) =>
 {
     const id = req.params.id
     if(!db.findById(id)) res.status(404).json({ message: "The post with the specified ID does not exist." })

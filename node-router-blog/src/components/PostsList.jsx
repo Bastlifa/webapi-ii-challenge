@@ -10,7 +10,7 @@ const PostsList = props =>
     const state = useSelector(state => state)
 
     const [currentPosts, setCurrentPosts] = useState(state.posts)
-    const [currentComments, setCurrentComments] = useState(state.comments)
+    // const [currentComments, setCurrentComments] = useState(state.comments)
 
     useEffect(_ =>
         {

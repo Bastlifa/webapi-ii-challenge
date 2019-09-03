@@ -38,3 +38,11 @@ export const CommentDiv = styled.div`
     margin: 20px 20px;
     border: 1px solid black;
 `;
+
+export const ModalDiv = styled.div`
+    width: 600px;
+    height: 200px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 6px;
+`;
